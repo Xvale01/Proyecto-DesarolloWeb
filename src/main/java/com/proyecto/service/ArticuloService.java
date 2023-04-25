@@ -2,7 +2,6 @@ package com.proyecto.service;
 
 
 import com.proyecto.domain.Articulo;
-import com.proyecto.domain.Categoria;
 import java.util.List;
 
 /**
@@ -14,7 +13,6 @@ public interface ArticuloService {
     //Obtiene la lista de registros de la tabla articulo
     //y lo coloca en una lista de objetos articulo
     public List<Articulo> getArticulos(boolean activos);
-    public List<Articulo> getArticulosCategorias(boolean activos, String categoria);
     //Obtiene el registro de la tabla articulo
     //que tiene el idArticulo pasado por el objeto articulo.
     public Articulo getArticulo(Articulo articulo);

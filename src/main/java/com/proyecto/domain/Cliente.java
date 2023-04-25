@@ -17,8 +17,8 @@ public class Cliente implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_cliente")
-    private Long idCliente;
+    @Column(name="id_comprador")
+    private Long idComprador;
     
     private String cedula;
     private String nombre;

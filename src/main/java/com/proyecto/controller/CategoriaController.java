@@ -16,41 +16,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/categoria")
 public class CategoriaController {
-
+    
     @Autowired
     private CategoriaService categoriaService;
-
+    
     @GetMapping("/listado")
-    public String inicio(Model model){  
-        var categorias=categoriaService.getCategorias(false);
+    public String inicio(Model model){
+        var categorias = categoriaService.getCategorias(false);
         model.addAttribute("categorias",categorias);
-        model.addAttribute("totalCategorias", categorias.size());
-        return "/categoria/listado";
+        model.addAttribute("totalCategorias",categorias.size());//el size se refiere a la cantidad de nodos del array list
+        return"/categoria/listado";
     }
-
+    
     @GetMapping("/eliminar/{idCategoria}")
     public String eliminaCategoria(Categoria categoria){
         categoriaService.deleteCategoria(categoria);
         return "redirect:/categoria/listado";
     }
-
-     @GetMapping("/modificar/{idCategoria}")
-    public String modificaCategoria(Categoria categoria,Model model){
-        categoria=categoriaService.getCategoria(categoria);
-        model.addAttribute("categoria", categoria);
-        return "/categoria/modifica";
-    }
-
-
-
+    
     @GetMapping("/nuevo")
     public String nuevoCategoria(Categoria categoria){
         return "/categoria/modifica";
     }
-
+    
     @PostMapping("/guardar")
     public String guardarCategoria(Categoria categoria){
         categoriaService.saveCategoria(categoria);
         return "redirect:/categoria/listado";
+    }
+    
+    @GetMapping("/modificar/{idCategoria}")
+    public String modificaCategoria(Categoria categoria, Model model){
+        categoria = categoriaService.getCategoria(categoria);
+        model.addAttribute("categoria", categoria);
+        return "/categoria/modifica";
+     
     }
 }
