@@ -1,0 +1,19 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Mieleta</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <h2>Listado de Compradores</h2>
+
+
+        <section th:replace="~{comprador/fragmentos :: btnAgregar}"/>
+        <section th:replace="~{comprador/fragmentos :: agregarComprador}"/> 
+        <section th:replace="~{comprador/fragmentos :: listadoComprador}"/>     
+
+        <footer th:replace="~{layout/plantilla :: footer} "/>
+    </body>
+</html>

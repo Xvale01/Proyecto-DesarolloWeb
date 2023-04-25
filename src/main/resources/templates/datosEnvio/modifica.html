@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Mieleta-Registrarse</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+        <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+
+            <h2>Registrarse</h2>
+            <a th:href="@{/}">Regresar</a>
+
+            <form th:action="@{/datosEnvio/guardar}" 
+                  method="post" 
+                  th:object="${idDatos}">
+
+
+                <input type="hidden" 
+                       name="idDatos" 
+                       th:field="*{idDatos}" />
+
+
+                <label>Ciudad</label>
+                <input type="text" 
+                       name="Ciudad" 
+                       value="" 
+                       th:field="*{ciudad}" 
+                       size="30" />
+                <br>
+
+
+                <label>Calle</label>
+                <input type="text" 
+                       name="Calle" 
+                       value="" 
+                       th:field="*{calle}" 
+                       size="30" />                
+                <br>
+
+                <input type="submit" value="Guardar" />
+            </form>
+
+
+        <footer th:replace="~{layout/plantilla :: footer} "/>
+
+    </body>
+</html>

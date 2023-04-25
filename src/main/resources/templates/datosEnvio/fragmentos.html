@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Mieleta</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <!-- 1 -->
+        <section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarDatosEnvio">
+                            <i class="fas fa-plus"></i> Agregar Direccion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2 -->
+        <section th:fragment="agregarDatosEnvio">
+            <div id="agregarDatosEnvio" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Agregar Direccion</h5>
+                            <button type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/datosEnvio/guardar}" th:object="${datosEnvio}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="provincia">Provincia</label>
+                                    <input type="text" class="form-control" name="provincia" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="canton">Canton</label>
+                                    <input type="text" class="form-control" name="canton" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="distrito">Distrito</label>
+                                    <input type="text" class="form-control" name="distrito" required="true">
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="otrasSenas">Otras Señas</label>
+                                    <input type="text" class="form-control" name="otrasSenas" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="codigoPostal">Codigo Postal</label>
+                                    <input type="number" class="form-control" name="codigoPostal" required="true">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3 -->  
+        <section th:fragment="listadoDatosEnvio" id="datosEnvio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de Direcciones</h4></div>
+                            <div th:if="${datosEnvios != null and !datosEnvios.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>Provincia</th>
+                                            <th>Canton</th>
+                                            <th>Distrito</th>
+                                            <th>Otras Señas</th>
+                                            <th>Codigo Postal</th>
+                                            
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="datosEnvio, contador : ${datosEnvios}">
+                                            <td>[[${datosEnvio.count}]]</td>
+                                            <td>[[${datosEnvio.provincia}]]</td>
+                                            <td>[[${datosEnvio.canton}]]</td>
+                                            <td>[[${datosEnvio.distrito}]]</td>
+                                            <td>[[${datosEnvio.otrasSenas}]]</td>
+                                            <td>[[${datosEnvio.codigoPostal}]]</td>
+                                            
+                                            <td><a th:href="@{/datosEnvio/eliminar/}+${datosEnvio.idDatos}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> Eliminar</a>
+                                                <a th:href="@{/datosEnvio/modificar/}+${datosEnvio.idDatos}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> Modificar</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${datosEnvio == null or datosEnvio.empty}">
+                                <span>Lista sin direcciones registradas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 4 -->
+        <section th:fragment="editarDatosEnvio">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/datosEnvio/guardar}" th:object="${datosEnvio}"
+                          class="was-validated">
+                        <input type="hidden" name="idDatos" th:field="*{idDatos}"/>
+                        <section th:replace="~{datosEnvio/fragmentos :: BtnEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Actualizar</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="provincia">Provincia</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="provincia" th:field="*{provincia}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="canton">Canton</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="canton" th:field="*{canton}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="distrito">Distrito</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="distrito" th:field="*{distrito}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="otrasSenas">Otras señas</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="otrasSenas" th:field="*{otrasSenas}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="codigoPostal">Codigo Postal</label>
+                                                    <input type="number" class="form-control" 
+                                                           name="codigoPostal" th:field="*{codigoPostal}"
+                                                           required="true">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+                        
+        <!-- 5 -->
+        <section th:fragment="BtnEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/datosEnvio/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/datosEnvio/eliminar/}+${datosEnvio.idDatos}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6 -->
+        
+        
+    </body>
+    
+    
+    

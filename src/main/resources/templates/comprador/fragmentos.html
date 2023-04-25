@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Mieleta</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <!-- 1 -->
+        <section th:fragment="btnAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarComprador">
+                            <i class="fas fa-plus"></i> Agregar Comprador
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2 -->
+        <section th:fragment="agregarComprador">
+            <div id="agregarComprador" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Agregar Comprador</h5>
+                            <button type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/comprador/guardar}" th:object="${comprador}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="cedula">Cedula</label>
+                                    <input type="number" class="form-control" name="cedula" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellidos">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellidos" required="true">
+                                </div>
+                                 <div class="mb-3">
+                                    <label for="fechaNacimiento">Fecha nacimiento</label>
+                                    <input type="date" class="form-control" name="fechaNacimiento" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">Correo</label>
+                                    <input type="email" class="form-control" name="correo" required="true">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telefono">Telefono</label>
+                                    <input type="tel" class="form-control" name="telefono">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3 -->  
+        <section th:fragment="listadoCompradores" id="compradores">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de Compradores</h4></div>
+                            <div th:if="${compradores != null and !compradores.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr><th>#</th>
+                                            <th>Cedula</th>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Fecha nacimiento</th>
+                                            <th>Correo</th>
+                                            <th>Telefono</th>
+                                            <th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="comprador, contador : ${compradores}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${comprador.cedula}]]</td>
+                                            <td>[[${comprador.nombre}]]</td>
+                                            <td>[[${comprador.apellidos}]]</td>
+                                            <td>[[${comprador.fechaNacimiento}]]</td>
+                                            <td>[[${comprador.correo}]]</td>
+                                            <td>[[${comprador.telefono}]]</td>
+                                            
+                                            <td><a th:href="@{/comprador/eliminar/}+${comprador.idComprador}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> Eliminar</a>
+                                                <a th:href="@{/comprador/modificar/}+${comprador.idComprador}"
+                                                   class="btn btn-success">
+                                                    <i class="fas fa-pencil"></i> Modificar</a></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${comprador == null or comprador.empty}">
+                                <span>Lista sin compradores registrados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- 4 -->
+        <section th:fragment="editarComprador">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form method="POST"
+                          th:action="@{/comprador/guardar}" th:object="${comprador}"
+                          class="was-validated">
+                        <input type="hidden" name="idComprador" th:field="*{idComprador}"/>
+                        <section th:replace="~{comprador/fragmentos :: BtnEditar}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Actualizar</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="cedula">Cedula</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="cedula" th:field="*{cedula}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="nombre">Nombre</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="nombre" th:field="*{nombre}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="apellidos">Apellidos</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="apellidos" th:field="*{apellidos}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="fechaNacimiento">Fecha nacimiento</label>
+                                                    <input type="date" class="form-control" 
+                                                           name="fechaNacimiento" th:field="*{fechaNacimiento}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="email">Correo</label>
+                                                    <input type="email" class="form-control" 
+                                                           name="correo" th:field="*{correo}"
+                                                           required="true">
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                    <label for="telefono">Telefono</label>
+                                                    <input type="tel" class="form-control" 
+                                                           name="telefono" th:field="*{telefono}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+                        
+        <!-- 5 -->
+        <section th:fragment="BtnEditar">
+            <div class="container py-4 mb-4 bg-light">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/comprador/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">                                
+                        <a th:href="@{/comprador/eliminar/}+${comprador.idComprador}"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6 -->
+        
+        
+    </body>
+    
+    
+    
