@@ -3,7 +3,6 @@ package com.proyecto.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 
@@ -17,13 +16,13 @@ public class Cliente implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_comprador")
-    private Long idComprador;
+    @Column(name="id_cliente")
+    private Long idCliente;
     
     private String cedula;
     private String nombre;
     private String apellidos;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String correo;
     private String telefono;
     
@@ -34,7 +33,7 @@ public class Cliente implements Serializable{
     public Cliente() {
     }
     
-    public Cliente(String cedula, String nombre, String apellidos, Date fechaNacimiento, String correo, String telefono, DatosEnvio datosEnvio) {
+    public Cliente(String cedula, String nombre, String apellidos, String fechaNacimiento, String correo, String telefono, DatosEnvio datosEnvio) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellidos = apellidos;
