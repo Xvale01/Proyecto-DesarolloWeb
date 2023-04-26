@@ -1,7 +1,9 @@
 package com.proyecto.service.impl;
 
 import com.proyecto.dao.ArticuloDao;
+import com.proyecto.dao.CategoriaDao;
 import com.proyecto.domain.Articulo;
+import com.proyecto.domain.Categoria;
 import com.proyecto.service.ArticuloService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class ArticuloServiceImpl implements ArticuloService {
     //Esto crea una unica copia de un objeto
     @Autowired
     private ArticuloDao articuloDao;
+    
+    @Autowired
+    private CategoriaDao categoriaDao;
     
     @Override
     public List<Articulo> getArticulos(boolean activos) {

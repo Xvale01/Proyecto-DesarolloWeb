@@ -73,14 +73,12 @@
                                     <thead class="table-dark">
                                         <tr><th>#</th>
                                             <th>Titular</th>
-                                            <th>Imagen</th>
                                             <th></th></tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="publicacion, contador : ${publicaciones}">
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${publicacion.titular}]]</td>
-                                            <td>[[${publicacion.imagen}]]</td>
                                             <td><a th:href="@{/publicacion/eliminar/}+${publicacion.idPublicacion}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> Eliminar</a>
