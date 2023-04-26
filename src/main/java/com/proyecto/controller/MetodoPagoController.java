@@ -25,13 +25,13 @@ public class MetodoPagoController {
         return "/metodoPago/listado";
     }
 
-    @GetMapping("/eliminar/{idMetodoPago}")
+    @GetMapping("/eliminar/{idMetodo}")
     public String eliminaMetodoPago(MetodoPago metodoPago){
         metodoPagoService.deleteMetodoPago(metodoPago);
         return "redirect:/metodoPago/listado";
     }
 
-     @GetMapping("/modificar/{idMetodoPago}")
+     @GetMapping("/modificar/{idMetodo}")
     public String modificaMetodoPago(MetodoPago metodoPago,Model model){
         metodoPago=metodoPagoService.getMetodoPago(metodoPago);
         model.addAttribute("metodoPago", metodoPago);
