@@ -82,7 +82,7 @@ public class CarritoController {
         itemService.actualiza(item);
         return "redirect:/carrito/listado";
     }
-
+    
     @GetMapping("/facturar/carrito")
     public String facturarCarrito() {
         itemService.facturar();

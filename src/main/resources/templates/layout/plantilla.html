@@ -16,7 +16,7 @@
         <header th:fragment="header" class="header">   
             <nav class="navbar navbar-expand-sm navbar-warning bg-warning text-black">      
                 <div class="container">        
-                    <a href="/" class="navbar-brand">MIELETA </a>
+                    <a href="/" class="navbar-brand fw-bold fs-1">MIELETA </a>
                     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -29,43 +29,70 @@
                     </button> 
 
 
-                    <div class="collapse navbar-collapse" id="navbarCollapse">  
-                        <ul class="navbar-nav">
-
-                            <li class="nav-item px-2">  
-                                <a class="nav-menu-link nav-link"
-                                   th:href="@{/articulo/listado}"
-                                   >Productos</a>                          
-                            </li>            
-
+                    <div class="collapse navbar-collapse " id="navbarCollapse">  
+                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+                            
                             <li class="nav-item px-2"> 
-                                <a class="nav-menu-link nav-link"
+                                <a class="nav-menu-link nav-link fw-semibold "
                                    th:href="@{/maps}"
                                    >Encuentranos</a>  
                             </li>   
-
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link" 
-                                   th:href="@{/cliente/listado}">Clientes</a>
+                            
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-menu-link nav-link fw-semibold " 
+                                   th:href="@{/cliente/listado}"
+                                   >Clientes</a>
                             </li>
                             
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link"
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-menu-link nav-link fw-semibold "
+                                   th:href="@{/metodoPago/listado}"
+                                   >Metodos de Pago</a>
+                            </li>          
+                            
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-menu-link nav-link fw-semibold "
                                    th:href="@{/publicacion/listado}"
                                    >Publicaciones</a>
                             </li>
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link"
+                            
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">  
+                                <a class="nav-menu-link nav-link fw-semibold "
+                                   th:href="@{/articulo/listado}"
+                                   >Productos</a>                          
+                            </li> 
+                            
+                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="nav-menu-link nav-link fw-semibold "
                                    th:href="@{/categoria/listado}"
                                    >Categorias</a>
                             </li>    
-                            <li class="nav-item px-2">
-                                <a class="nav-menu-link nav-link"
-                                   th:href="@{/metodoPago/listado}"
-                                   >Metodos de Pago</a>
-                            </li>    
+                                                    
                         </ul>    
                     </div>  
+                    
+                    <div>
+                        <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                            <li class="nav-item px-2">
+                                <a class="nav-menu-link nav-link" th:href="@{/login}">
+                                    <i class='fas fa-sign-in-alt'></i>
+                                </a>
+                            </li>                            
+                        </ul>
+                        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                            <li class="nav-item text-black my-auto">
+                                <i class='fas fa-user'></i> <span sec:authentication='name'>Santi</span>
+                            </li>
+                            <li class="nav-item my-auto">
+                                <form method="post" th:action="@{/logout}">
+                                    <button class="btn btn-warning">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </button>
+                                </form>
+                            </li>                            
+                        </ul>
+                    </div>
+                    
                 </div>   
             </nav>   
 

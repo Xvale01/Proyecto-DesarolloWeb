@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Mieleta</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
@@ -44,11 +44,13 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="descripcion">Descripcion</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true">
+                                    <input type="text" class="form-control" name="descripcion" required="true" 
+                                           placeholder="Digite una descripcion de la categoria">
                                 </div>
                                 <div class="mb-3">
                                     <label for="activo">Activo</label>
-                                    <input type="boolean" class="form-control" name="activo" required="true">
+                                    <input type="boolean" class="form-control" name="activo" required="true"
+                                           placeholder="Ingrese si 1 si esta activa la categoria, sino 0">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -130,13 +132,15 @@
                                                     <label for="descripcion">Descripcion</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
+                                                           required="true"
+                                                           placeholder="Ingrese una descripcion de la categoria">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="activo">Activo</label>
                                                     <input type="activo" class="form-control" 
                                                            name="activo" th:field="*{activo}"
-                                                           required="true">
+                                                           required="true"
+                                                           placeholder="Ingrese si 1 si esta activa la categoria, sino 0">
                                                 </div>
                                             </div>
                                         </div>

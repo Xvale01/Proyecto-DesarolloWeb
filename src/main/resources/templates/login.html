@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://wwww.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Mieleta</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
@@ -13,7 +13,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header bg-success">
-                            <h2>[[#{login.login}]]</h2>
+                            <h2>Login</h2>
                         </div>
                         <div class="card-body">
                             <form method="POST" th:action="@{/login}"> 
@@ -21,7 +21,7 @@
                                 <div class="form-group row my-3">
                                     <label class="col-md-5 my-auto" for="username">
                                         <i class="fas fa-user-lock"></i>
-                                        [[#{login.username}]]:</label>
+                                        Username</label>
                                     
                                     <div class="col-md-7 my-auto">
                                         <input class="form-control" 
@@ -30,7 +30,7 @@
                                 <div class="form-group row my-3">
                                     <label class="col-md-5 my-auto" for="password">
                                         <i class="fas fa-key"></i>
-                                        [[#{login.password}]]</label>
+                                        Password</label>
                                     <div class="col-md-7 my-auto">
                                         <input class="form-control" 
                                                type="password" name="password" 
@@ -38,7 +38,7 @@
                                 <div class="card-footer col text-center">
                                     <button class="btn btn-success" type="submit">
                                         <i class="fas fa-sign-in-alt"></i>
-                                        [[#{login.login}]]</button>
+                                        Login</button>
                                 </div>
                             </form>
                         </div>

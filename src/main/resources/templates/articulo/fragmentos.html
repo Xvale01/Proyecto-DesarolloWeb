@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Mieleta</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
@@ -44,35 +44,43 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="idCategoria">Id Categoria</label>
-                                    <input type="number" class="form-control" name="categoria.idCategoria" required="true">
+                                    <input type="number" class="form-control" name="categoria.idCategoria" required="true"
+                                           placeholder="Ingrese el id de la categoría">
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">Nombre articulo</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true">
+                                    <input type="text" class="form-control" name="descripcion" required="true"
+                                           placeholder="Ingrese el nombre del articulo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="detalle">Detalle</label>
-                                    <input type="text" class="form-control" name="detalle" required="true">
+                                    <input type="text" class="form-control" name="detalle" required="true"
+                                           placeholder="Ingrese el detalle del articulo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="precio">Precio</label>
-                                    <input type="double" class="form-control" name="precio" required="true">
+                                    <input type="double" class="form-control" name="precio" required="true"
+                                           placeholder="Ingrese el precio del articulo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="existencias">Existencias</label>
-                                    <input type="number" class="form-control" name="existencias">
+                                    <input type="number" class="form-control" name="existencias" required="true"
+                                           placeholder="Ingrese las cantidad de existencias del articulo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="imagen">Imagen</label>
-                                    <input type="text" class="form-control" name="imagen">
+                                    <input type="text" class="form-control" name="imagen" required="true"
+                                           placeholder="Ingrese el url de la imagen del articulo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="activo">Activo</label>
-                                    <input type="boolean" class="form-control" name="activo">
+                                    <input type="boolean" class="form-control" name="activo" required="true"
+                                           placeholder="Ingrese si 1 si esta activo el articulo, sino 0">
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion">Categoria</label>
-                                    <input type="text" class="form-control" name="categoria.descripcion" required="true">
+                                    <input type="text" class="form-control" name="categoria.descripcion" required="true"
+                                           placeholder="Ingrese el nombre de la categoria del articulo">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -96,7 +104,6 @@
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th># Art.</th>
-                                            <th># Cat.</th>
                                             <th>Nombre</th>
                                             <th>Detalle</th>
                                             <th>Precio</th>
@@ -108,7 +115,6 @@
                                     <tbody>
                                         <tr th:each="articulo, contador : ${articulos}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${articulo.categoria.idCategoria}]]</td>
                                             <td>[[${articulo.descripcion}]]</td>
                                             <td>[[${articulo.detalle}]]</td>
                                             <td>[[${articulo.precio}]]</td>
@@ -165,49 +171,56 @@
                                                     <label for="idCategoria">Id Categoria</label>
                                                     <input type="text" class="form-control" 
                                                            name="idCategoria" th:field="*{categoria.idCategoria}"
-                                                           required="true">
+                                                           required="true" 
+                                                           placeholder="Ingrese el id de la categoría">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="descripcion">Nombre art.</label>
+                                                    <label for="descripcion">Nombre articulo</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{descripcion}"
-                                                           required="true">
+                                                           required="true"
+                                                           placeholder="Ingrese el nombre del articulo">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="detalle">Detalle</label>
                                                     <input type="text" class="form-control" 
                                                            name="detalle" th:field="*{detalle}"
-                                                           required="true">
+                                                           required="true" 
+                                                           placeholder="Ingrese el detalle del articulo">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="precio">Precio</label>
                                                     <input type="double" class="form-control" 
                                                            name="precio" th:field="*{precio}"
-                                                           required="true">
+                                                           required="true"
+                                                           placeholder="Ingrese el precio del articulo">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="existencias">Existencias</label>
                                                     <input type="number" class="form-control" 
                                                            name="existencias" th:field="*{existencias}"
-                                                           required="true">
+                                                           required="true"
+                                                           placeholder="Ingrese las cantidad de existencias del articulo">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imagen">Imagen</label>
                                                     <input type="text" class="form-control" 
                                                            name="imagen" th:field="*{imagen}"
-                                                           required="true">
+                                                           required="true" placeholder="Ingrese el url de la imagen del articulo">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="activo">activo</label>
                                                     <input type="boolean" class="form-control" 
                                                            name="activo" th:field="*{activo}"
-                                                           required="true">
+                                                           required="true" 
+                                                           placeholder="Ingrese si 1 si esta activo el articulo, sino 0">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="descripcion">Categoria</label>
                                                     <input type="text" class="form-control" 
                                                            name="descripcion" th:field="*{categoria.descripcion}"
-                                                           required="true">
+                                                           required="true" 
+                                                           placeholder="Ingrese el nombre de la categoria del articulo">
                                                 </div>
 
                                             </div>

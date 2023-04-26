@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>TechShop</title>
+        <title>Mieleta</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
@@ -44,11 +44,13 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="titular">Titular</label>
-                                    <input type="text" class="form-control" name="titular" required="true">
+                                    <input type="text" class="form-control" name="titular" 
+                                           placeholder="Ingrese un titular para la publicacion">
                                 </div>                               
                                 <div class="mb-3">
                                     <label for="imagen">Imagen</label>
-                                    <input type="text" class="form-control" name="imagen">
+                                    <input type="text" class="form-control" name="imagen"
+                                           placeholder="Ingrese el url de la imagen de la publicacion">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -128,13 +130,16 @@
                                                     <label for="titular">Titular</label>
                                                     <input type="text" class="form-control" 
                                                            name="titular" th:field="*{titular}"
-                                                           required="true">
+                                                           
+                                                           placeholder="Ingrese un titular para la publicacion">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="imagen">Imagen</label>
                                                     <input type="text" class="form-control" 
                                                            name="imagen" th:field="*{imagen}"
-                                                           required="true">
+                                                           
+                                                           placeholder="Ingrese el url de la imagen de la publicacion">
+
                                                 </div>
 
                                             </div>
