@@ -17,20 +17,14 @@
             <nav class="navbar navbar-expand-sm navbar-warning bg-warning text-black">      
                 <div class="container">        
                     <a href="/" class="navbar-brand fw-bold fs-1">MIELETA </a>
+                    
                     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    
-                    <button class="navbar-toggler" 
-                            data-bs-toggle="collapse"
-                            data-bs-target="#menu">  
-                        <span class="navbar-toggler-icon"></span>  
-                    </button> 
-
-
                     <div class="collapse navbar-collapse " id="navbarCollapse">  
-                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+                        <ul class="navbar-nav" 
+                            sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                             
                             <li class="nav-item px-2"> 
                                 <a class="nav-menu-link nav-link fw-semibold "
@@ -67,7 +61,6 @@
                                    th:href="@{/categoria/listado}"
                                    >Categorias</a>
                             </li>    
-                                                    
                         </ul>    
                     </div>  
                     
@@ -97,6 +90,9 @@
             </nav>   
 
         </header>    
+        
+        
+        
         <footer th:fragment="footer" class=" bg-warning  text-black">  
             <div class="container">
                 <div class="row">

@@ -29,13 +29,10 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                        
                 .requestMatchers("/",
                         "/index",
                         "/carrito/**"
                 ).permitAll()
-                        
-                        
                 .requestMatchers(
                         "/articulo/nuevo",
                         "/articulo/guardar",
@@ -56,14 +53,9 @@ public class SecurityConfig {
                         "/categoria/listado",
                         "/comprador/listado"
                 ).hasRole("ADMIN")
-                        
- 
-                        
-                        
                 .requestMatchers("/facturar/carrito")
                 .hasRole("USER")
                 )
-                
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())
                 .logout((logout) -> logout.permitAll())
